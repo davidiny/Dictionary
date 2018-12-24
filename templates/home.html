@@ -37,25 +37,30 @@
         </div>
       </nav>
     <body class = "align-items-center container ">
-        <h1 class = "text-center"> {{word}} </h1>
+        <!-- <div class="page-header">
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div> -->
+        <h1 class = "text-center"> Word of the Day: {{word}} </h1>
         <br>
         <h1 class = "text-center"> Definition : {{definition}} </h1>
         <br>
         <h2 class = "text-center"> Part of Speech : {{partOfSpeech}} </h2>
             <br>
         <div id="the_form">
-            <form method="GET">
-                <br>
-                <input class="form-control col-md-12" type="text" placeholder="Search">
+          {% block content %}
+            <form method="POST">{% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit">Submit</button>
             </form>
+          {% endblock %}
         </div>
             </div>
             </div>
             <br>
             <div class="col-md-12 text-center">
-                <a class="btn btn-lg btn-primary" href="{% url 'index' %}">Click here</a>
+                <a class="btn btn-lg btn-primary" href="{% url 'index' %}">I'm Feeling Lucky</a>
                 <!-- <button id = "luckyButton" type="button" class="btn btn-primary btn-lg" onClick= {url 'myapp:mypage'}>I'm Feeling Lucky</button> -->
             </div>
-        </form>
     </body>
 </html>
