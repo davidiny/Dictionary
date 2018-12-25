@@ -2,4 +2,4 @@ from django import forms
 
 class MyForm(forms.Form):
 
-    word = forms.CharField(max_length=20)
+    word = forms.CharField(label="", help_text="", max_length=20)

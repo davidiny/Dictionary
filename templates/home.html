@@ -9,8 +9,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     </head>
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Diktionary.com</a>
+        <a class="navbar-brand" href="{% url 'home_index' %}">Diktionary.com</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,7 +28,7 @@
               <a class="nav-link" href="{% url 'pricing' %}">Pricing</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About Us</a>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
           </ul>
           <!-- <form class="form-inline my-2 my-lg-0">
@@ -36,7 +37,8 @@
           </form> -->
         </div>
       </nav>
-    <body class = "align-items-center container ">
+    
+    <body class = "text-center ">
         <!-- <div class="page-header">
             <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
             <h1><a href="/">Django Girls Blog</a></h1>
@@ -51,7 +53,7 @@
           {% block content %}
             <form method="POST">{% csrf_token %}
               {{ form.as_p }}
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn btn-lg btn-primary">Submit</button>
             </form>
           {% endblock %}
         </div>
