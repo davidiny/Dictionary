@@ -44,12 +44,14 @@
         <br>
         <h2 class = "text-center"> Part of Speech : {{partOfSpeech}} </h2>
             <br>
-        <div id="the_form">
-            <form method="GET">
-                <br>
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            </form>
-        </div>
+            <div id="the_form">
+                {% block content %}
+                  <form method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit</button>
+                  </form>
+                {% endblock %}
+              </div>
             </div>
             </div>
             <br>
