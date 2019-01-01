@@ -16,7 +16,7 @@ def index(request):
             resp = requests.get('http://api.wordnik.com/v4/word.json/{}/definitions?api_key=14b5420c184640c683005077d1008bba39ae0cd175d218830'.format(search))
             answer = resp.json()
             # html = t.render({'word' : answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0]['partOfSpeech']})
-            return render(request, 'home.html', {'form': form, 'word': answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0]['partOfSpeech']})
+            return render(request, 'definition.html', {'form': form, 'word': answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0].get('partOfSpeech', "N/A")})
     else:
         form = MyForm(request.POST or None)
         resp = requests.get('http://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=14b5420c184640c683005077d1008bba39ae0cd175d218830')
@@ -26,7 +26,7 @@ def index(request):
         # for x in answer:
         #     print(x)
         # return HttpResponse(html)
-    return render(request, 'home.html', {'form': form, 'word': answer['word'], 'definition' : answer['definitions'][0]['text'], 'partOfSpeech' : answer['definitions'][0]['partOfSpeech']})
+    return render(request, 'home.html', {'form': form, 'word': answer['word'], 'definition' : answer['definitions'][0]['text'], 'partOfSpeech' : answer['definitions'][0].get('partOfSpeech', "N/A")})
 
 def post_new(request):
     form = MyForm()
@@ -38,7 +38,7 @@ def post_new(request):
             search = cd.get('word')
             resp = requests.get('http://api.wordnik.com/v4/word.json/{}/definitions?api_key=14b5420c184640c683005077d1008bba39ae0cd175d218830'.format(search))
             answer = resp.json()
-            html = t.render({'word' : answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0]['partOfSpeech']})
+            html = t.render({'word' : answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0].get('partOfSpeech', "N/A")})
             return HttpResponse(html)
     else:
         form = MyForm(request.POST or None)
