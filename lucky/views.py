@@ -18,6 +18,13 @@ def lucky_index(request):
             search = cd.get('word')
             resp = requests.get('http://api.wordnik.com/v4/word.json/{}/definitions?api_key=14b5420c184640c683005077d1008bba39ae0cd175d218830'.format(search))
             answer = resp.json()
+            if len(answer) == 0: 
+                resp = requests.get('http://api.wordnik.com/v4/words.json/randomWord?api_key=14b5420c184640c683005077d1008bba39ae0cd175d218830')
+                answer = resp.json()
+                the_word = str(answer['word'])
+                resp2 = requests.get('http://api.wordnik.com/v4/word.json/{}/definitions?api_key=14b5420c184640c683005077d1008bba39ae0cd175d218830'.format(the_word))
+                answer2 = resp2.json()
+                return render(request, 'random.html', {'form': form, 'message': True, 'word': answer['word'], 'definition': answer2[0]['text'], 'partOfSpeech': answer2[0].get('partOfSpeech', "N/A")})
             # html = t.render({'word' : answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0]['partOfSpeech']})
             return render(request, 'definition.html', {'form': form, 'word': answer[0]['word'], 'definition' : answer[0]['text'], 'partOfSpeech' : answer[0].get('partOfSpeech', "N/A")})
     else:
