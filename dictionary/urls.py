@@ -18,10 +18,10 @@ from django.urls import include, path
 from django.contrib.flatpages import views as flat_views
 
 urlpatterns = [
+    path('', include('home.urls')),
     path('examples/', include('examples.urls')),
     path('definitions/', include('definitions.urls')),
     path('admin/', admin.site.urls),
-    path('home/', include('home.urls')),
     path('lucky/', include('lucky.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('pages/pricing/', flat_views.flatpage, {'url': '/pages/pricing/'}, name='pricing'),
